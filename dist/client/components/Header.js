@@ -15,6 +15,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require("react-redux");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _LoginForm = require("./LoginForm");
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
@@ -31,6 +33,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Header = (_dec = (0, _reactRedux.connect)(function (store) {
 	return {
+		status: store.user.status,
 		loggedIn: store.user.loggedIn,
 		username: store.user.userData.username
 	};
@@ -62,11 +65,32 @@ var Header = (_dec = (0, _reactRedux.connect)(function (store) {
 	}, {
 		key: "render",
 		value: function render() {
+			if (this.props.status == "fetching") {
+				return _react2.default.createElement(
+					"div",
+					{ id: "over-all" },
+					_react2.default.createElement(
+						"p",
+						null,
+						"Fetching user data..."
+					)
+				);
+			}
+
 			return _react2.default.createElement(
-				"div",
+				"header",
 				null,
 				"#header",
-				_react2.default.createElement(_LoginForm2.default, {
+				this.props.loggedIn ? _react2.default.createElement(
+					"p",
+					null,
+					"Hello,",
+					_react2.default.createElement(
+						_reactRouterDom.Link,
+						{ to: "/profile" },
+						this.props.username
+					)
+				) : _react2.default.createElement(_LoginForm2.default, {
 					login: this.login.bind(this),
 					signup: this.signup.bind(this)
 				})

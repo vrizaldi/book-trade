@@ -9,14 +9,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 exports.default = reduce;
 var initialStates = {
 	status: "idle",
-	loggedIn: false,
-	error: null,
-	userData: {
-		username: "",
-		fullName: "",
-		city: "",
-		state: ""
-	}
+	err: null,
+	books: []
 };
 
 function reduce() {
@@ -24,44 +18,32 @@ function reduce() {
 	var action = arguments[1];
 
 	switch (action.type) {
-		case "LOGIN_PENDING":
+		case "ADD_BOOK_PENDING":
 			return _extends({}, state, {
 				status: "fetching"
 			});
 
-		case "LOGIN_FULFILLED":
-			var data = action.payload.data;
+		case "ADD_BOOK_FULFILLED":
+			var books = state.books.splice(0); // clone it
+			var _action$payload$data = action.payload.data,
+			    bookID = _action$payload$data.bookID,
+			    title = _action$payload$data.title,
+			    imageurl = _action$payload$data.imageurl;
+
+			books.push({
+				bookID: bookID,
+				title: title,
+				imageurl: imageurl
+			});
 
 			return _extends({}, state, {
 				status: "succeed",
-				loggedIn: true,
-				userData: _extends({}, state.userData, {
-					username: data.username,
-					fullName: data.fullName,
-					city: data.city,
-					state: data.state
-				})
+				books: books
 			});
 
-		case "LOGIN_REJECTED":
+		case "ADD_BOOK_REJECTED":
 			return _extends({}, state, {
-				status: "failed",
-				error: action.payload.data
-			});
-
-		case "SIGNUP_PENDING":
-			return _extends({}, state, {
-				status: "fetching"
-			});
-
-		case "SIGNUP_FULFILLED":
-			return _extends({}, state, {
-				status: "succeed"
-			});
-
-		case "SIGNUP_REJECTED":
-			return _extends({}, state, {
-				status: "failed"
+				err: action.payload.data
 			});
 
 		default:

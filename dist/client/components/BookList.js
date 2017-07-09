@@ -11,14 +11,6 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _InputField = require("./InputField");
-
-var _InputField2 = _interopRequireDefault(_InputField);
-
-var _Button = require("./Button");
-
-var _Button2 = _interopRequireDefault(_Button);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27,43 +19,45 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LoginForm = function (_React$Component) {
-	_inherits(LoginForm, _React$Component);
+var BookList = function (_React$Component) {
+	_inherits(BookList, _React$Component);
 
-	function LoginForm() {
-		_classCallCheck(this, LoginForm);
+	function BookList() {
+		_classCallCheck(this, BookList);
 
-		return _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).apply(this, arguments));
+		return _possibleConstructorReturn(this, (BookList.__proto__ || Object.getPrototypeOf(BookList)).apply(this, arguments));
 	}
 
-	_createClass(LoginForm, [{
+	_createClass(BookList, [{
 		key: "render",
 		value: function render() {
 			return _react2.default.createElement(
 				"div",
 				null,
-				_react2.default.createElement(_InputField2.default, { id: "username",
-					maxlength: "13",
-					placeholder: "Username"
-				}),
-				_react2.default.createElement(_InputField2.default, { id: "password",
-					placeholder: "Password",
-					maxlength: "13",
-					type: "password"
-				}),
-				_react2.default.createElement(_Button2.default, {
-					action: this.props.login,
-					label: "Login"
-				}),
-				_react2.default.createElement(_Button2.default, {
-					action: this.props.signup,
-					label: "Sign up"
+				_react2.default.createElement(
+					"h2",
+					null,
+					"Your Collection"
+				),
+
+				// list the books
+				this.props.books.map(function (book) {
+					return _react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement("img", { src: book.imageurl, alt: "Cover of " + book.title }),
+						_react2.default.createElement(
+							"h4",
+							null,
+							book.title
+						)
+					);
 				})
 			);
 		}
 	}]);
 
-	return LoginForm;
+	return BookList;
 }(_react2.default.Component);
 
-exports.default = LoginForm;
+exports.default = BookList;

@@ -10,8 +10,13 @@ var _userReducer = require("./userReducer");
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
+var _shelfReducer = require("./shelfReducer");
+
+var _shelfReducer2 = _interopRequireDefault(_shelfReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-	user: _userReducer2.default
+	user: _userReducer2.default,
+	shelf: _shelfReducer2.default
 });

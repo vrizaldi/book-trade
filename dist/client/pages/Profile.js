@@ -15,6 +15,16 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require("react-redux");
 
+var _reactRouterDom = require("react-router-dom");
+
+var _Shelf = require("./Shelf");
+
+var _Shelf2 = _interopRequireDefault(_Shelf);
+
+var _ProfileSettings = require("./ProfileSettings");
+
+var _ProfileSettings2 = _interopRequireDefault(_ProfileSettings);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25,9 +35,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Profile = (_dec = (0, _reactRedux.connect)(function (store) {
 	return {
-		status: store.user.status,
-		loggedIn: store.user.loggedIn,
-		userData: store.user.userData
+		loggedIn: store.user.loggedIn
 	};
 }), _dec(_class = function (_React$Component) {
 	_inherits(Profile, _React$Component);
@@ -41,6 +49,11 @@ var Profile = (_dec = (0, _reactRedux.connect)(function (store) {
 	_createClass(Profile, [{
 		key: "render",
 		value: function render() {
+			if (!this.props.loggedIn) {
+				// redirect to home if not logged in
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: "/" });
+			}
+
 			return _react2.default.createElement(
 				"div",
 				null,
@@ -48,6 +61,13 @@ var Profile = (_dec = (0, _reactRedux.connect)(function (store) {
 					"h1",
 					null,
 					"#Profile"
+				),
+				_react2.default.createElement(_reactRouterDom.Redirect, { from: "/profile", to: "/profile/shelf" }),
+				_react2.default.createElement(
+					_reactRouterDom.Switch,
+					null,
+					_react2.default.createElement(_reactRouterDom.Route, { path: "/profile/shelf", component: _Shelf2.default }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: "/profile/settings", component: _ProfileSettings2.default })
 				)
 			);
 		}

@@ -20,6 +20,10 @@ var _handleSignup = require("./handleSignup");
 
 var _handleSignup2 = _interopRequireDefault(_handleSignup);
 
+var _addBook = require("./addBook");
+
+var _addBook2 = _interopRequireDefault(_addBook);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var server = (0, _express2.default)();
@@ -28,8 +32,10 @@ server.use(_express2.default.static(__dirname + "/../public"));
 var jsonencoded = _bodyParser2.default.json();
 
 server.get("*", _servePage2.default);
+
 server.post("/login", jsonencoded, _handleLogin2.default);
 server.post("/signup", jsonencoded, _handleSignup2.default);
+server.post("/add_book", jsonencoded, _addBook2.default);
 
 var port = process.env.PORT ? process.env.PORT : 21701;
 server.listen(port, function (err) {

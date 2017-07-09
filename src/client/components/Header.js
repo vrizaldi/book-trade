@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import LoginForm from "./LoginForm";
 import { login, signup } from "../actions/UserActions";
 
 @connect ((store) => {
 	return {
+		status: store.user.status,
 		loggedIn: store.user.loggedIn,
 		username: store.user.userData.username
 	};
@@ -26,14 +28,31 @@ import { login, signup } from "../actions/UserActions";
 	}
 
 	render() {
+		if(this.props.status == "fetching") {
+			return(
+				<div id="over-all">
+					<p>Fetching user data...</p>
+				</div>
+			);
+		}
+
 		return(
-			<div>
+			<header>
 				#header
-				<LoginForm 
-					login={this.login.bind(this)} 
-					signup={this.signup.bind(this)} 
-				/>
-			</div>
+				{
+					this.props.loggedIn ? (
+						<p>Hello, 
+							<Link to="/profile">{this.props.username}</Link>
+						</p>
+					)	: (
+						<LoginForm 
+							login={this.login.bind(this)} 
+							signup={this.signup.bind(this)} 
+						/>
+					)
+				}
+				
+			</header>
 		);
 	}
 }

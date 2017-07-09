@@ -1,17 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect, Switch, Route } from "react-router-dom";
+
+import Shelf from "./Shelf";
+import ProfileSettings from "./ProfileSettings";
 
 @connect((store) => {
 	return {
-		status: store.user.status,
-		loggedIn: store.user.loggedIn,
-		userData: store.user.userData
+		loggedIn: store.user.loggedIn
 	};
 }) export default class Profile extends React.Component {
 	render() {
+		if(!this.props.loggedIn) {
+			// redirect to home if not logged in
+			return(<Redirect to="/" />);
+		}
+
 		return(
 			<div>
 				<h1>#Profile</h1>
+				<Redirect from="/profile" to="/profile/shelf" />
+				<Switch>
+					<Route path="/profile/shelf" component={Shelf} />
+					<Route path="/profile/settings" component={ProfileSettings} />
+				</Switch>
 			</div>
 		);
 	}

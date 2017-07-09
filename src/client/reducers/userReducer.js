@@ -23,6 +23,7 @@ export default function reduce(state=initialStates, action) {
 		return {
 			...state,
 			status: "succeed",
+			loggedIn: true,
 			userData: {
 				...state.userData,
 				username: data.username,

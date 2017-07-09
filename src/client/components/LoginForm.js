@@ -8,10 +8,12 @@ export default class LoginForm extends React.Component {
 		return(
 			<div>
 				<InputField id="username"
+					maxlength="13"
 					placeholder="Username" 
 				/>
 				<InputField id="password"
 					placeholder="Password"
+					maxlength="13"
 					type="password" 
 				/>
 				<Button 

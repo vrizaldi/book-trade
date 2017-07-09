@@ -9,9 +9,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dec, _class;
 
-//import { fetchShelf } from "../shelf"
-
-
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -54,7 +51,7 @@ var Shelf = (_dec = (0, _reactRedux.connect)(function (store) {
 		key: "componentDidMount",
 		value: function componentDidMount() {
 			// load the books owned by the user
-			//	this.props.dispatch(fetchShelf(username));
+			this.props.dispatch((0, _ShelfActions.fetchShelf)(this.props.username));
 		}
 	}, {
 		key: "addBook",
@@ -65,13 +62,24 @@ var Shelf = (_dec = (0, _reactRedux.connect)(function (store) {
 			this.props.dispatch((0, _ShelfActions.addBook)(this.props.username, title, author));
 		}
 	}, {
+		key: "removeBook",
+		value: function removeBook(bookID) {
+			console.log("Removing " + bookID + "...");
+			this.props.dispatch((0, _ShelfActions.removeBook)(this.props.username, bookID));
+		}
+	}, {
 		key: "render",
 		value: function render() {
 			return _react2.default.createElement(
 				"div",
 				null,
 				_react2.default.createElement(_NewBookForm2.default, { addBook: this.addBook.bind(this) }),
-				_react2.default.createElement(_BookList2.default, { books: this.props.books })
+				_react2.default.createElement(_BookList2.default, { title: "Your Collection",
+					books: this.props.books,
+					buttonAction: this.removeBook.bind(this),
+					buttonClassName: "btn btn-danger",
+					buttonLabel: "Remove"
+				})
 			);
 		}
 	}]);

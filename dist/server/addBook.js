@@ -32,7 +32,7 @@ function addBook(req, res) {
 	var parsedAuthor = author.trim().split(" ").join("+");
 
 	console.log("Searching book:" + parsedTitle + " author:" + parsedAuthor + " for " + username + "...");
-	_axios2.default.get("https://www.googleapis.com/books/v1/volumes?q=intitle:" + parsedTitle + "+inauthor:" + parsedAuthor).then(function (bookRes) {
+	_axios2.default.get("https://www.googleapis.com/books/v1/volumes?q=" + parsedTitle + "+inauthor:" + parsedAuthor).then(function (bookRes) {
 
 		if (bookRes.data.totalItems > 0) {
 			// book found, so proceed
@@ -71,10 +71,12 @@ function addBook(req, res) {
 						$set: {
 							title: book.volumeInfo.title,
 							author: book.volumeInfo.authors[0],
-							imageurl: book.volumeInfo.imageLinks.medium
+							imageurl: book.volumeInfo.imageLinks.thumbnail
 						},
 						$push: {
-							owner: user._id
+							owners: {
+								_id: _mongodb2.default.ObjectId(user._id)
+							}
 						}
 					}, {
 						upsert: true,
@@ -90,14 +92,16 @@ function addBook(req, res) {
 							_id: _mongodb2.default.ObjectId(user._id)
 						}, {
 							$push: {
-								books: _mongodb2.default.ObjectId(book.id)
+								books: {
+									_id: _mongodb2.default.ObjectId(book.id)
+								}
 							}
 						});
 
 						// update successful
 						console.log("Book added to database");
 						res.json({
-							bookID: _mongodb2.default.ObjectId(book.id),
+							_id: _mongodb2.default.ObjectId(book.id),
 							title: book.volumeInfo.title,
 							author: book.volumeInfo.authors[0],
 							imageurl: book.volumeInfo.imageLinks.thumbnail

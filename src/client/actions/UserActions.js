@@ -33,3 +33,20 @@ export function signup(username, password) {
 		})
 	};
 }
+
+export function request(username, bookID) {
+	return {
+		type: "REQUEST",
+		payload: axios({
+			method: "post",
+			url: "/request",
+			data: {
+				username,
+				bookID
+			},
+			headers: {
+				"content-type": "application/json"
+			}		
+		})
+	};
+}

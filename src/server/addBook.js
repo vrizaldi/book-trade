@@ -12,7 +12,7 @@ export default function addBook(req, res) {
 
 	console.log(`Searching book:${parsedTitle} author:${parsedAuthor} for ${username}...`);
 	axios.get(
-		`https://www.googleapis.com/books/v1/volumes?q=intitle:${parsedTitle}+inauthor:${parsedAuthor}`
+		`https://www.googleapis.com/books/v1/volumes?q=${parsedTitle}+inauthor:${parsedAuthor}`
 	).then((bookRes) => {
 
 		if(bookRes.data.totalItems > 0) {
@@ -52,10 +52,12 @@ export default function addBook(req, res) {
 						$set: {
 							title: book.volumeInfo.title,
 							author: book.volumeInfo.authors[0],
-							imageurl: book.volumeInfo.imageLinks.medium
+							imageurl: book.volumeInfo.imageLinks.thumbnail
 						},
 						$push: {
-							owner: user._id
+							owners: {
+								_id: mongo.ObjectId(user._id)
+							}
 						}
 					}, {
 						upsert: true,
@@ -71,14 +73,16 @@ export default function addBook(req, res) {
 							_id: mongo.ObjectId(user._id)
 						}, {
 							$push: {
-								books: mongo.ObjectId(book.id)
+								books: {
+									_id: mongo.ObjectId(book.id)
+								}
 							}
 						});
 
 						// update successful
 						console.log("Book added to database");
 						res.json({
-							bookID: mongo.ObjectId(book.id),
+							_id: mongo.ObjectId(book.id),
 							title: book.volumeInfo.title,
 							author: book.volumeInfo.authors[0],
 							imageurl: book.volumeInfo.imageLinks.thumbnail

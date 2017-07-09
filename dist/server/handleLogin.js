@@ -33,17 +33,16 @@ function handleLogin(req, res) {
 			return db.close();
 		}
 
-		db.collection("users").find({
+		db.collection("users").findOne({
 			username: username
-		}).toArray(function (err, docs) {
+		}, function (err, user) {
 			if (err) {
 				res.status(401).send("Invalid username and password combination");
 				return db.close();
 			}
 
-			if (docs.length == 1) {
+			if (user) {
 				// user found, proceed
-				var user = docs[0];
 
 				// compare hash of password entered and password stored
 				_bcrypt2.default.compare(password, user.passwordHash, function (err, valid) {
@@ -67,6 +66,9 @@ function handleLogin(req, res) {
 					}
 					db.close();
 				});
+			} else {
+				// user not found
+				res.status(401).send("Invalid username and password combination");
 			}
 		});
 	});

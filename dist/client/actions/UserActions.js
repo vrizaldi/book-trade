@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.login = login;
 exports.signup = signup;
+exports.request = request;
 
 var _axios = require("axios");
 
@@ -38,6 +39,23 @@ function signup(username, password) {
 			data: {
 				username: username,
 				password: password
+			},
+			headers: {
+				"content-type": "application/json"
+			}
+		})
+	};
+}
+
+function request(username, bookID) {
+	return {
+		type: "REQUEST",
+		payload: (0, _axios2.default)({
+			method: "post",
+			url: "/request",
+			data: {
+				username: username,
+				bookID: bookID
 			},
 			headers: {
 				"content-type": "application/json"

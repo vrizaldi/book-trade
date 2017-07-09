@@ -16,15 +16,15 @@ export default function handleSignup(req, res) {
 		}
 
 		// check if username is used
-		db.collection("users").find({
+		db.collection("users").findOne({
 			username: username,
-		}).toArray(function(err, docs) {
+		}, (err, user) => {
 			if(err) {
 				res.status(500).send();
 				return db.close();
 			}
 
-			if(docs.length == 1) {
+			if(user !== null) {
 				// username is used
 				// tell the user
 				res.status(409).send("Username is used");

@@ -11,6 +11,10 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Button = require("./Button");
+
+var _Button2 = _interopRequireDefault(_Button);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31,13 +35,15 @@ var BookList = function (_React$Component) {
 	_createClass(BookList, [{
 		key: "render",
 		value: function render() {
+			var _this2 = this;
+
 			return _react2.default.createElement(
 				"div",
 				null,
 				_react2.default.createElement(
 					"h2",
 					null,
-					"Your Collection"
+					this.props.title
 				),
 
 				// list the books
@@ -50,7 +56,12 @@ var BookList = function (_React$Component) {
 							"h4",
 							null,
 							book.title
-						)
+						),
+						_react2.default.createElement(_Button2.default, { className: _this2.props.buttonClassName,
+							label: _this2.props.buttonLabel,
+							action: _this2.props.buttonAction,
+							value: book._id
+						})
 					);
 				})
 			);

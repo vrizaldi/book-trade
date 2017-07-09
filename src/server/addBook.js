@@ -27,37 +27,64 @@ export default function addBook(req, res) {
 					return db.close();
 				}
 
-				// save book into database
-				db.collection("books").save({
-					bookID: book.id,
-					title: book.volumeInfo.title,
-					imageurl: book.volumeInfo.imageLinks.medium
-				}, (err) => {
+				// find user
+				db.collection("users").findOne({
+					username: username
+				}, (err, user) => {
 					if(err) {
 						res.status(500).send();
-						return db.close();
+						db.close();
 					}
 
-					// if succeeds, update ownership
-					db.collection("ownerships").save({
-						bookID: book.id,
-						username: username
+					if(user === null) {
+						// user not found
+						res.status(401).send("User unauthorized");
+						db.close();
+					}
+
+					console.log("user", user);
+
+					// user found, so proceed
+					// update book ownership / insert new book
+					db.collection("books").update({
+						_id: mongo.ObjectId(book.id)
+					}, {
+						$set: {
+							title: book.volumeInfo.title,
+							author: book.volumeInfo.authors[0],
+							imageurl: book.volumeInfo.imageLinks.medium
+						},
+						$push: {
+							owner: user._id
+						}
+					}, {
+						upsert: true,
+						returnOriginal: false
 					}, (err) => {
 						if(err) {
 							res.status(500).send();
 							return db.close();
 						}
 
-						// all went perfectly
-						console.log("Successfully updated");
-						res.json({
-							bookID: book.id,
-							title: book.volumeInfo.title,
-							imageurl: book.volumeInfo.imageLinks.medium
+						// update user
+						db.collection("users").findOneAndUpdate({
+							_id: mongo.ObjectId(user._id)
+						}, {
+							$push: {
+								books: mongo.ObjectId(book.id)
+							}
 						});
 
-					});	// db ownership save
-				});	// db books save
+						// update successful
+						console.log("Book added to database");
+						res.json({
+							bookID: mongo.ObjectId(book.id),
+							title: book.volumeInfo.title,
+							author: book.volumeInfo.authors[0],
+							imageurl: book.volumeInfo.imageLinks.thumbnail
+						});
+					});	// update book
+				});	// find user
 			});	// mongo connect
 
 		} else {

@@ -58,11 +58,6 @@ var Profile = (_dec = (0, _reactRedux.connect)(function (store) {
 				"div",
 				null,
 				_react2.default.createElement(
-					"h1",
-					null,
-					"#Profile"
-				),
-				_react2.default.createElement(
 					_reactRouterDom.Switch,
 					null,
 					_react2.default.createElement(_reactRouterDom.Route, { path: "/profile/shelf", component: _Shelf2.default }),

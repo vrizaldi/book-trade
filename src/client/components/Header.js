@@ -40,7 +40,7 @@ import { login, signup } from "../actions/UserActions";
 			<header className="navbar fixed-top">
 				<div className="row">
 					<div id="logo" className="col-md-2">
-						#header
+						Book Exchange
 					</div>
 					<div className="col-md-10">
 						{

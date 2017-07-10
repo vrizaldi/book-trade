@@ -11,6 +11,7 @@ import removeBook from "./removeBook";
 import requestBook from "./requestBook";
 import cancelRequest from "./cancelRequest";
 import parseRequest from "./parseRequest";
+import updateBio from "./updateBio";
 
 var server = express();
 
@@ -28,6 +29,7 @@ server.post("/add_book", jsonencoded, addBook);
 server.post("/remove_book", jsonencoded, removeBook);
 server.post("/request", jsonencoded, requestBook);
 server.post("/cancel_request", jsonencoded, cancelRequest);
+server.post("/update_bio", jsonencoded, updateBio);
 
 var port = process.env.PORT ? process.env.PORT : 21701;
 server.listen(port, 

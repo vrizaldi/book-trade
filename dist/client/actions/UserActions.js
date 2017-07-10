@@ -7,6 +7,7 @@ exports.login = login;
 exports.signup = signup;
 exports.request = request;
 exports.cancelRequest = cancelRequest;
+exports.updateBio = updateBio;
 
 var _axios = require("axios");
 
@@ -137,4 +138,23 @@ function parseRequests(dispatch, requests, requestNotifs) {
 			payload: err
 		});
 	});
+}
+
+function updateBio(username, fullName, city, state) {
+	return {
+		type: "UPDATE_BIO",
+		payload: (0, _axios2.default)({
+			method: "post",
+			url: "/update_bio",
+			data: {
+				username: username,
+				fullName: fullName,
+				city: city,
+				state: state
+			},
+			headers: {
+				"content-type": "application/json"
+			}
+		})
+	};
 }

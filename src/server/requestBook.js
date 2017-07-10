@@ -151,7 +151,6 @@ export default function requestBook(req, res) {
 																requestNotifs: requestNotifs
 															});
 															db.close();
-															db.close();
 														}
 													});
 												}

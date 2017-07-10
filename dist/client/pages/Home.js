@@ -79,11 +79,6 @@ var Home = (_dec = (0, _reactRedux.connect)(function (store) {
 			return _react2.default.createElement(
 				"div",
 				null,
-				_react2.default.createElement(
-					"h1",
-					null,
-					"#Home"
-				),
 				this.props.userStatus == "fetching" ? _react2.default.createElement(
 					"p",
 					null,

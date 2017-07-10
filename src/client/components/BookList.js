@@ -7,22 +7,24 @@ export default class BookList extends React.Component {
 		return(
 			<div>
 				<h2>{this.props.title}</h2>
-				{
-					// list the books
-					this.props.books.map((book) => {
-						return(
-							<div>
-								<img src={book.imageurl} alt={"Cover of " + book.title}/>
-								<h4>{book.title}</h4>
-								<Button className={this.props.buttonClassName} 
-									label={this.props.buttonLabel}
-									action={this.props.buttonAction}
-									value={book._id}
-								/>
-							</div>
-						);
-					})
-				}
+				<div id="book-list">
+					{
+						// list the books
+						this.props.books.map((book) => {
+							return(
+								<div className="books">
+									<img src={book.imageurl} alt={"Cover of " + book.title}/>
+									<h4>{book.title}</h4>
+									<Button className={this.props.buttonClassName} 
+										label={this.props.buttonLabel}
+										action={this.props.buttonAction}
+										value={book._id}
+									/>
+								</div>
+							);
+						})
+					}
+				</div>
 			</div>
 		);
 	}

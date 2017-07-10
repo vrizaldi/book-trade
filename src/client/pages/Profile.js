@@ -18,7 +18,6 @@ import ProfileSettings from "./ProfileSettings";
 
 		return(
 			<div>
-				<h1>#Profile</h1>
 				<Switch>
 					<Route path="/profile/shelf" component={Shelf} />
 					<Route path="/profile/settings" component={ProfileSettings} />

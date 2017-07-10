@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import BioForm from "../components/BioForm";
+import { updateBio } from "../actions/UserActions";
 
 @connect((store) => {
 	return {
@@ -14,6 +15,7 @@ import BioForm from "../components/BioForm";
 		var city = document.getElementById("city").value;
 		var state = document.getElementById("state").value;
 		console.log(`${fullName} lives in ${city}, ${state}`);
+		this.props.dispatch(updateBio(this.props.userData.username, fullName, city, state));
 	}
 
 	render() {

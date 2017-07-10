@@ -126,3 +126,22 @@ function parseRequests(dispatch, requests, requestNotifs) {
 		});
 	});
 }
+
+export function updateBio(username, fullName, city, state) {
+	return {
+		type: "UPDATE_BIO",
+		payload: axios({
+			method: "post",
+			url: "/update_bio",
+			data: {
+				username,
+				fullName,
+				city,
+				state
+			}, 
+			headers: {
+				"content-type": "application/json"
+			}
+		})
+	};
+}

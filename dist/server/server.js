@@ -48,6 +48,10 @@ var _parseRequest = require("./parseRequest");
 
 var _parseRequest2 = _interopRequireDefault(_parseRequest);
 
+var _updateBio = require("./updateBio");
+
+var _updateBio2 = _interopRequireDefault(_updateBio);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var server = (0, _express2.default)();
@@ -66,6 +70,7 @@ server.post("/add_book", jsonencoded, _addBook2.default);
 server.post("/remove_book", jsonencoded, _removeBook2.default);
 server.post("/request", jsonencoded, _requestBook2.default);
 server.post("/cancel_request", jsonencoded, _cancelRequest2.default);
+server.post("/update_bio", jsonencoded, _updateBio2.default);
 
 var port = process.env.PORT ? process.env.PORT : 21701;
 server.listen(port, function (err) {

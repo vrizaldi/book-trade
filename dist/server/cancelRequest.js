@@ -123,7 +123,7 @@ function cancelRequest(req, res) {
 												} else {
 
 													// everything went perfectly
-													console.log("Request succesfully created");
+													console.log("Request removed");
 													console.log("userChange value", userChange.value);
 													res.json({
 														requests: requests,

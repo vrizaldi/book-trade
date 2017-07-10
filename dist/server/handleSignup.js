@@ -47,7 +47,7 @@ function handleSignup(req, res) {
 			if (user !== null) {
 				// username is used
 				// tell the user
-				res.status(409).send("Username is used");
+				res.status(401).send("Username is used");
 			} else {
 				// username is available, so proceed
 				// hash password

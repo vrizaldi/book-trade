@@ -161,7 +161,6 @@ function requestBook(req, res) {
 																requestNotifs: requestNotifs
 															});
 															db.close();
-															db.close();
 														}
 													});
 												}

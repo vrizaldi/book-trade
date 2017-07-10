@@ -45,25 +45,29 @@ var BookList = function (_React$Component) {
 					null,
 					this.props.title
 				),
+				_react2.default.createElement(
+					"div",
+					{ id: "book-list" },
 
-				// list the books
-				this.props.books.map(function (book) {
-					return _react2.default.createElement(
-						"div",
-						null,
-						_react2.default.createElement("img", { src: book.imageurl, alt: "Cover of " + book.title }),
-						_react2.default.createElement(
-							"h4",
-							null,
-							book.title
-						),
-						_react2.default.createElement(_Button2.default, { className: _this2.props.buttonClassName,
-							label: _this2.props.buttonLabel,
-							action: _this2.props.buttonAction,
-							value: book._id
-						})
-					);
-				})
+					// list the books
+					this.props.books.map(function (book) {
+						return _react2.default.createElement(
+							"div",
+							{ className: "books" },
+							_react2.default.createElement("img", { src: book.imageurl, alt: "Cover of " + book.title }),
+							_react2.default.createElement(
+								"h4",
+								null,
+								book.title
+							),
+							_react2.default.createElement(_Button2.default, { className: _this2.props.buttonClassName,
+								label: _this2.props.buttonLabel,
+								action: _this2.props.buttonAction,
+								value: book._id
+							})
+						);
+					})
+				)
 			);
 		}
 	}]);

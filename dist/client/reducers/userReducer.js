@@ -45,22 +45,26 @@ function reduce() {
 			});
 
 		case "USER_DATA_REJECTED":
+			alert(action.payload.response.data ? action.payload.response.data : action.payload);
 			return _extends({}, state, {
 				status: "failed",
 				error: action.payload.data
 			});
 
-		case "SIGNUP_PENDING":
+		case "SIGN_UP_PENDING":
 			return _extends({}, state, {
 				status: "fetching"
 			});
 
-		case "SIGNUP_FULFILLED":
+		case "SIGN_UP_FULFILLED":
+			alert("Signup successful, now you can login!");
 			return _extends({}, state, {
 				status: "succeed"
 			});
 
-		case "SIGNUP_REJECTED":
+		case "SIGN_UP_REJECTED":
+			console.log("payload ");
+			alert(action.payload.response.data ? action.payload.response.data : action.payload);
 			return _extends({}, state, {
 				status: "failed"
 			});
@@ -83,6 +87,31 @@ function reduce() {
 			return _extends({}, state, {
 				status: "failed",
 				err: action.payload.data
+			});
+
+		case "UPDATE_BIO_PENDING":
+			return _extends({}, state, {
+				status: "fetching"
+			});
+
+		case "UPDATE_BIO_FULFILLED":
+			var _action$payload$data = action.payload.data,
+			    fullName = _action$payload$data.fullName,
+			    city = _action$payload$data.city;
+
+			return _extends({}, state, {
+				status: "succeed",
+				userData: _extends({}, state.userData, {
+					fullName: fullName,
+					city: city,
+					state: action.payload.data.state
+				})
+			});
+
+		case "UPDATE_BIO_REJECTED":
+			alert(action.payload);
+			return _extends({}, state, {
+				status: "failed"
 			});
 
 		default:

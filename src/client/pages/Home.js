@@ -37,7 +37,6 @@ import RequestList from "../components/RequestList";
 		console.log("loggedIn", this.props.loggedIn);
 		return(
 			<div>
-				<h1>#Home</h1>
 				{
 					this.props.userStatus == "fetching" ? (
 						<p>Fetching requests made by and for the user...</p>

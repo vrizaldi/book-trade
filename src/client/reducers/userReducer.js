@@ -35,25 +35,29 @@ export default function reduce(state=initialStates, action) {
 		};
 
 	case "USER_DATA_REJECTED":
+		alert(action.payload.response.data ? action.payload.response.data : action.payload);
 		return {
 			...state,
 			status: "failed",
 			error: action.payload.data
 		};
 
-	case "SIGNUP_PENDING":
+	case "SIGN_UP_PENDING":
 		return {
 			...state,
 			status: "fetching"
 		};
 
-	case "SIGNUP_FULFILLED":
+	case "SIGN_UP_FULFILLED":
+		alert("Signup successful, now you can login!");
 		return {
 			...state,
 			status: "succeed"
 		};
 
-	case "SIGNUP_REJECTED":
+	case "SIGN_UP_REJECTED":
+		console.log("payload ");
+		alert(action.payload.response.data ? action.payload.response.data : action.payload);
 		return {
 			...state,
 			status: "failed"
@@ -83,7 +87,32 @@ export default function reduce(state=initialStates, action) {
 			err: action.payload.data
 		};
 			
+	case "UPDATE_BIO_PENDING":
+		return {
+			...state,
+			status: "fetching"
+		};
 		
+	case "UPDATE_BIO_FULFILLED":
+		var { fullName, city } = action.payload.data;
+		return {
+			...state,
+			status: "succeed",
+			userData: {
+				...state.userData,
+				fullName,
+				city,
+				state: action.payload.data.state
+			}
+		};
+
+	case "UPDATE_BIO_REJECTED":
+		alert(action.payload);
+		return {
+			...state,
+			status: "failed"
+		};
+
 	default:
 		return state;
 	}

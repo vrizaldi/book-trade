@@ -3,6 +3,17 @@ body {
 	margin: 0;
 }
 
+.navbar.fixed-top {
+	background-color: #fff;
+	box-shadow: 0% 0px 10px 0px #f5eaf4;
+	-webkit-box-shadow: 0% 0px 10px 0px #f5eaf4;
+	-moz-box-shadow: 0% 0px 10px 0px #f5eaf4;
+}
+
+.navbar div {
+	float: right;
+}
+
 #over-all {
 	position: fixed;
 	top: 0;
@@ -19,6 +30,26 @@ body {
 	vertical-align: middle;
 }
 
+#book-list {
+	display: flex;
+	flex: 0 0 20%;
+	overflow-x: auto;
+}
+
+.books {
+	height: 400px;
+	padding: 10px 10px 0 10px;
+	width: 200px;
+	text-align: center;
+	box-shadow-bottom: 0 400px 10px -10px #f5eaf4;
+	-webkit-box-shadow-bottom: 0 400px 10px -10px #f5eaf4;
+	-moz-box-shadow-bottom: 0 400px 10px -10px #f5eaf4;
+}
+
+.books img {
+	height: 180px;
+	max-width: 200px;
+}
 
 #credit {
 	font-size: 0.8em;

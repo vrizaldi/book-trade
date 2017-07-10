@@ -90,7 +90,7 @@ var Header = (_dec = (0, _reactRedux.connect)(function (store) {
 					_react2.default.createElement(
 						"div",
 						{ id: "logo", className: "col-md-2" },
-						"#header"
+						"Book Exchange"
 					),
 					_react2.default.createElement(
 						"div",

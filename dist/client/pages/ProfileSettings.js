@@ -19,6 +19,8 @@ var _BioForm = require("../components/BioForm");
 
 var _BioForm2 = _interopRequireDefault(_BioForm);
 
+var _UserActions = require("../actions/UserActions");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47,6 +49,7 @@ var ProfileSettings = (_dec = (0, _reactRedux.connect)(function (store) {
 			var city = document.getElementById("city").value;
 			var state = document.getElementById("state").value;
 			console.log(fullName + " lives in " + city + ", " + state);
+			this.props.dispatch((0, _UserActions.updateBio)(this.props.userData.username, fullName, city, state));
 		}
 	}, {
 		key: "render",

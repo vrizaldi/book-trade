@@ -32,7 +32,7 @@ function handleSignup(req, res) {
 	_mongodb2.default.connect("mongodb://" + dbusername + ":" + dbpassword + "@ds153422.mlab.com:53422/book-trade", function (err, db) {
 		if (err) {
 			res.status(500).send();
-			return db.close();
+			return;
 		}
 
 		// check if username is used
@@ -70,7 +70,9 @@ function handleSignup(req, res) {
 							passwordHash: hash,
 							fullName: "",
 							city: "",
-							state: ""
+							state: "",
+							requests: [],
+							requestNotifs: []
 						}, function (err) {
 							if (err) {
 								res.status(500).send();

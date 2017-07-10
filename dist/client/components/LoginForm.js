@@ -41,7 +41,7 @@ var LoginForm = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				"div",
-				null,
+				{ className: "form-inline" },
 				_react2.default.createElement(_InputField2.default, { id: "username",
 					maxlength: "13",
 					placeholder: "Username"
@@ -51,11 +51,11 @@ var LoginForm = function (_React$Component) {
 					maxlength: "13",
 					type: "password"
 				}),
-				_react2.default.createElement(_Button2.default, {
+				_react2.default.createElement(_Button2.default, { className: "btn btn-primary",
 					action: this.props.login,
 					label: "Login"
 				}),
-				_react2.default.createElement(_Button2.default, {
+				_react2.default.createElement(_Button2.default, { className: "btn btn-success",
 					action: this.props.signup,
 					label: "Sign up"
 				})

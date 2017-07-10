@@ -6,7 +6,9 @@ const initialStates = {
 		username: "",
 		fullName: "",
 		city: "",
-		state: ""
+		state: "",
+		requests: [],
+		requestNotifs: []
 	}
 };
 
@@ -18,11 +20,10 @@ export default function reduce(state=initialStates, action) {
 			status: "fetching"
 		};
 
-	case "LOGIN_FULFILLED":
+	case "USER_DATA_RECEIVED":
 		var { data } = action.payload;
 		return {
 			...state,
-			status: "succeed",
 			loggedIn: true,
 			userData: {
 				...state.userData,
@@ -33,7 +34,7 @@ export default function reduce(state=initialStates, action) {
 			}
 		};
 
-	case "LOGIN_REJECTED":
+	case "USER_DATA_REJECTED":
 		return {
 			...state,
 			status: "failed",
@@ -57,6 +58,31 @@ export default function reduce(state=initialStates, action) {
 			...state,
 			status: "failed"
 		};
+
+	case "REQUEST_PENDING":
+		return {
+			...state,
+			status: "fetching"
+		};
+
+	case "REQUEST_PARSED":
+		return {
+			...state,
+			status: "succeed",
+			userData: {
+				...state.userData,
+				requests: action.payload.data.requests,
+				requestNotifs: action.payload.data.requestNotifs
+			}
+		};
+
+	case "REQUEST_FAILED":
+		return {
+			...state,
+			status: "failed",
+			err: action.payload.data
+		};
+			
 		
 	default:
 		return state;

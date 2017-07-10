@@ -10,7 +10,7 @@ export default function loadAll(req, res) {
 	mongo.connect(`mongodb://${dbusername}:${dbpassword}@ds153422.mlab.com:53422/book-trade`, (err, db) => {
 		if(err) {
 			res.status(500).send();
-			return db.close();
+			return;
 		}
 
 		// get all the books

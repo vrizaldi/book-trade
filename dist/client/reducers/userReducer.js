@@ -15,7 +15,9 @@ var initialStates = {
 		username: "",
 		fullName: "",
 		city: "",
-		state: ""
+		state: "",
+		requests: [],
+		requestNotifs: []
 	}
 };
 
@@ -29,11 +31,10 @@ function reduce() {
 				status: "fetching"
 			});
 
-		case "LOGIN_FULFILLED":
+		case "USER_DATA_RECEIVED":
 			var data = action.payload.data;
 
 			return _extends({}, state, {
-				status: "succeed",
 				loggedIn: true,
 				userData: _extends({}, state.userData, {
 					username: data.username,
@@ -43,7 +44,7 @@ function reduce() {
 				})
 			});
 
-		case "LOGIN_REJECTED":
+		case "USER_DATA_REJECTED":
 			return _extends({}, state, {
 				status: "failed",
 				error: action.payload.data
@@ -62,6 +63,26 @@ function reduce() {
 		case "SIGNUP_REJECTED":
 			return _extends({}, state, {
 				status: "failed"
+			});
+
+		case "REQUEST_PENDING":
+			return _extends({}, state, {
+				status: "fetching"
+			});
+
+		case "REQUEST_PARSED":
+			return _extends({}, state, {
+				status: "succeed",
+				userData: _extends({}, state.userData, {
+					requests: action.payload.data.requests,
+					requestNotifs: action.payload.data.requestNotifs
+				})
+			});
+
+		case "REQUEST_FAILED":
+			return _extends({}, state, {
+				status: "failed",
+				err: action.payload.data
 			});
 
 		default:

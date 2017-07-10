@@ -6,7 +6,7 @@ import Button from "./Button";
 export default class LoginForm extends React.Component {
 	render() {
 		return(
-			<div>
+			<div className="form-inline">
 				<InputField id="username"
 					maxlength="13"
 					placeholder="Username" 
@@ -16,11 +16,11 @@ export default class LoginForm extends React.Component {
 					maxlength="13"
 					type="password" 
 				/>
-				<Button 
+				<Button className="btn btn-primary"
 					action={this.props.login}
 					label="Login"
 				/>
-				<Button 
+				<Button className="btn btn-success"
 					action={this.props.signup}
 					label="Sign up"
 				/>

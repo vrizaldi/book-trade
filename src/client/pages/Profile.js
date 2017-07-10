@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, Switch, Route } from "react-router-dom";
+import { Redirect, Switch, Route, IndexRoute } from "react-router-dom";
 
 import Shelf from "./Shelf";
 import ProfileSettings from "./ProfileSettings";
@@ -19,7 +19,6 @@ import ProfileSettings from "./ProfileSettings";
 		return(
 			<div>
 				<h1>#Profile</h1>
-				<Redirect from="/profile" to="/profile/shelf" />
 				<Switch>
 					<Route path="/profile/shelf" component={Shelf} />
 					<Route path="/profile/settings" component={ProfileSettings} />

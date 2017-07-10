@@ -33,7 +33,7 @@
     "redux": "*",
     "redux-logger": "*",
     "redux-promise-middleware": "*",
-    "redux-thunk": "*",
+    "redux-thunk": "^2.2.0",
     "webpack": "*"
   },
   "author": "vrizaldi",

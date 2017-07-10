@@ -11,6 +11,10 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Button = require("./Button");
+
+var _Button2 = _interopRequireDefault(_Button);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19,36 +23,43 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Button = function (_React$Component) {
-	_inherits(Button, _React$Component);
+var Request = function (_React$Component) {
+	_inherits(Request, _React$Component);
 
-	function Button() {
-		_classCallCheck(this, Button);
+	function Request() {
+		_classCallCheck(this, Request);
 
-		return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+		return _possibleConstructorReturn(this, (Request.__proto__ || Object.getPrototypeOf(Request)).apply(this, arguments));
 	}
 
-	_createClass(Button, [{
-		key: "click",
-		value: function click() {
-			this.props.action(this.props.value);
-		}
-	}, {
+	_createClass(Request, [{
 		key: "render",
 		value: function render() {
+			console.log("request", this.props.request);
+			var _props$request = this.props.request,
+			    _id = _props$request._id,
+			    title = _props$request.title,
+			    requester = _props$request.requester,
+			    requesterCity = _props$request.requesterCity;
+
+
+			console.log("props", this.props.request);
+			var extra = " from " + requester + (requesterCity == "" ? "" : " in " + requesterCity);
+			var label = title + (this.props.showSource ? extra : "");
+
 			return _react2.default.createElement(
-				"button",
-				{ id: this.props.id,
-					className: this.props.className,
-					onClick: this.click.bind(this),
-					value: this.props.value
-				},
-				this.props.label
+				"div",
+				null,
+				_react2.default.createElement(_Button2.default, { className: this.props.className,
+					action: this.props.onClick,
+					label: label,
+					value: _id
+				})
 			);
 		}
 	}]);
 
-	return Button;
+	return Request;
 }(_react2.default.Component);
 
-exports.default = Button;
+exports.default = Request;

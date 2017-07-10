@@ -1,17 +1,22 @@
 body {
-	padding: 4em;
+	padding: 6em 4em 4em 4em;
 	margin: 0;
 }
 
 #over-all {
 	position: fixed;
+	top: 0;
+	left: 0;
 	width: 95%;
-	height: 95%;
+	height: 100%;
 	z-index: 10;
-	text-align: center;
-	vertical-align: middle;
 	background-color: white;
 	opacity: 0.85;
+}
+
+#over-all-text {
+	text-align: center;
+	vertical-align: middle;
 }
 
 

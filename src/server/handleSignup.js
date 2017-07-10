@@ -12,7 +12,7 @@ export default function handleSignup(req, res) {
 	mongo.connect(`mongodb://${dbusername}:${dbpassword}@ds153422.mlab.com:53422/book-trade`, (err, db) => {
 		if(err) {
 			res.status(500).send();
-			return db.close();
+			return;
 		}
 
 		// check if username is used
@@ -51,7 +51,9 @@ export default function handleSignup(req, res) {
 							passwordHash: hash,
 							fullName: "",
 							city: "",
-							state: "" 
+							state: "" ,
+							requests: [],
+							requestNotifs: []
 						}, (err) => {
 							if(err) {
 								res.status(500).send();

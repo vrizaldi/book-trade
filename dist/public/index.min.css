@@ -1,1 +1,1 @@
-body{padding:4em;margin:0}#over-all{position:fixed;width:95%;height:95%;z-index:10;text-align:center;vertical-align:middle;background-color:white;opacity:.85}#credit{font-size:.8em;float:right}
+body{padding:6em 4em 4em 4em;margin:0}#over-all{position:fixed;top:0;left:0;width:95%;height:100%;z-index:10;background-color:white;opacity:.85}#over-all-text{text-align:center;vertical-align:middle}#credit{font-size:.8em;float:right}

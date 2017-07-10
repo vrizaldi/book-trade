@@ -70,30 +70,55 @@ var Header = (_dec = (0, _reactRedux.connect)(function (store) {
 					"div",
 					{ id: "over-all" },
 					_react2.default.createElement(
-						"p",
-						null,
-						"Fetching user data..."
+						"div",
+						{ id: "over-all-text" },
+						_react2.default.createElement(
+							"p",
+							null,
+							"Fetching user data..."
+						)
 					)
 				);
 			}
 
 			return _react2.default.createElement(
 				"header",
-				null,
-				"#header",
-				this.props.loggedIn ? _react2.default.createElement(
-					"p",
-					null,
-					"Hello,",
+				{ className: "navbar fixed-top" },
+				_react2.default.createElement(
+					"div",
+					{ className: "row" },
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: "/profile" },
-						this.props.username
+						"div",
+						{ id: "logo", className: "col-md-2" },
+						"#header"
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "col-md-10" },
+						this.props.loggedIn ? _react2.default.createElement(
+							"div",
+							{ className: "nav nav-fill row" },
+							_react2.default.createElement(
+								_reactRouterDom.Link,
+								{ className: "nav-link", to: "/" },
+								"Home"
+							),
+							_react2.default.createElement(
+								_reactRouterDom.Link,
+								{ className: "nav-link", to: "/profile/shelf" },
+								"Manage Library"
+							),
+							_react2.default.createElement(
+								_reactRouterDom.Link,
+								{ className: "nav-link", to: "/profile/settings" },
+								"Settings"
+							)
+						) : _react2.default.createElement(_LoginForm2.default, {
+							login: this.login.bind(this),
+							signup: this.signup.bind(this)
+						})
 					)
-				) : _react2.default.createElement(_LoginForm2.default, {
-					login: this.login.bind(this),
-					signup: this.signup.bind(this)
-				})
+				)
 			);
 		}
 	}]);

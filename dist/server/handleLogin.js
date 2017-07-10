@@ -30,7 +30,7 @@ function handleLogin(req, res) {
 	_mongodb2.default.connect("mongodb://" + dbusername + ":" + dbpassword + "@ds153422.mlab.com:53422/book-trade", function (err, db) {
 		if (err) {
 			res.status(500).send();
-			return db.close();
+			return;
 		}
 
 		db.collection("users").findOne({
@@ -53,18 +53,61 @@ function handleLogin(req, res) {
 
 					// check if password is valid
 					if (valid) {
-						res.json({
-							username: user.username,
-							fullName: user.fullName,
-							city: user.city,
-							state: user.state
+						// parse request
+						var requestQuery = user.requests.length > 0 ? user.requests.map(function (request) {
+							return { _id: _mongodb2.default.ObjectId(request._id) };
+						}) : [{ _id: "null" }];
+
+						// search database for requests
+						console.log("requestQuery", requestQuery);
+						db.collection("requests").find({
+							$or: requestQuery
+						}).toArray(function (err, requests) {
+							if (err) {
+								console.log(err);
+								res.status(500).send();
+								return db.close();
+							} else {
+								console.log("requests", requests);
+
+								// successfully load requests, proceed
+								// parse request notifs
+								var notifQuery = user.requestNotifs.length > 0 ? user.requestNotifs.map(function (notif) {
+									return { _id: _mongodb2.default.ObjectId(notif._id) };
+								}) : [{ _id: "null" }];
+
+								// search database for request
+								console.log("notifQuery", notifQuery);
+								db.collection("requests").find({
+									$or: notifQuery
+								}).toArray(function (err, requestNotifs) {
+									if (err) {
+										res.status(500).send();
+										console.log(err);
+										return db.close();
+									} else {
+										// successfully load request notifs
+										// everything went perfectly
+										console.log("requestNotifs", requestNotifs);
+										console.log("User logged in successfully");
+										res.json({
+											username: user.username,
+											fullName: user.fullName,
+											city: user.city,
+											state: user.state,
+											requests: requests,
+											requestNotifs: requestNotifs
+										});
+										db.close();
+									}
+								});
+							}
 						});
-						console.log("User logged in successfully");
 					} else {
 						res.status(401).send("Invalid username and password combination");
 						console.log("User failed to login");
+						db.close();
 					}
-					db.close();
 				});
 			} else {
 				// user not found

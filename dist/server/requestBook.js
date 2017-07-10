@@ -27,7 +27,7 @@ function requestBook(req, res) {
 	_mongodb2.default.connect("mongodb://" + dbusername + ":" + dbpassword + "@ds153422.mlab.com:53422/book-trade", function (err, db) {
 		if (err) {
 			res.status(500).send();
-			return db.close();
+			return;
 		}
 
 		// check if user exist
@@ -111,15 +111,61 @@ function requestBook(req, res) {
 												_id: _mongodb2.default.ObjectId(request._id)
 											}
 										}
+									}, {
+										returnOriginal: false
 									}, function (err, userChange) {
+										var user = userChange.value;
 										if (err) {
 											res.status(500).send();
 											return db.close();
 										} else {
-											// everything went perfectly
-											console.log("Request succesfully created");
-											res.status(200).send();
-											db.close();
+											// parse request
+											var requestQuery = user.requests.length > 0 ? user.requests.map(function (request) {
+												return { _id: _mongodb2.default.ObjectId(request._id) };
+											}) : [{ _id: "null" }];
+
+											// search database for requests
+											console.log("requestQuery", requestQuery);
+											db.collection("requests").find({
+												$or: requestQuery
+											}).toArray(function (err, requests) {
+												if (err) {
+													console.log(err);
+													res.status(500).send();
+													return db.close();
+												} else {
+													console.log("requests", requests);
+
+													// successfully load requests, proceed
+													// parse request notifs
+													var notifQuery = user.requestNotifs.length > 0 ? user.requestNotifs.map(function (notif) {
+														return { _id: _mongodb2.default.ObjectId(notif._id) };
+													}) : [{ _id: "null" }];
+
+													// search database for request
+													console.log("notifQuery", notifQuery);
+													db.collection("requests").find({
+														$or: notifQuery
+													}).toArray(function (err, requestNotifs) {
+														if (err) {
+															res.status(500).send();
+															console.log(err);
+															return db.close();
+														} else {
+
+															// everything went perfectly
+															console.log("Request succesfully created");
+															console.log("userChange value", userChange.value);
+															res.json({
+																requests: requests,
+																requestNotifs: requestNotifs
+															});
+															db.close();
+															db.close();
+														}
+													});
+												}
+											});
 										}
 									});
 								} else {

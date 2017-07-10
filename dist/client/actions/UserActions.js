@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.login = login;
 exports.signup = signup;
 exports.request = request;
+exports.cancelRequest = cancelRequest;
 
 var _axios = require("axios");
 
@@ -14,9 +15,13 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function login(username, password) {
-	return {
-		type: "LOGIN",
-		payload: (0, _axios2.default)({
+	return function (dispatch) {
+		dispatch({
+			type: "LOGIN_PENDING"
+		});
+
+		// basic login
+		(0, _axios2.default)({
 			method: "post",
 			url: "/login",
 			data: {
@@ -26,7 +31,23 @@ function login(username, password) {
 			headers: {
 				"content-type": "application/json"
 			}
-		})
+		}).then(function (res) {
+			console.log("res", res);
+			// acquired user data
+			dispatch({
+				type: "USER_DATA_RECEIVED",
+				payload: res
+			});
+
+			// parse the requests
+			parseRequests(dispatch, res.data.requests, res.data.requestNotifs);
+		}).catch(function (err) {
+			console.log("err", err);
+			dispatch({
+				type: "USER_DATA_REJECTED",
+				payload: err
+			});
+		});
 	};
 }
 
@@ -48,9 +69,13 @@ function signup(username, password) {
 }
 
 function request(username, bookID) {
-	return {
-		type: "REQUEST",
-		payload: (0, _axios2.default)({
+
+	return function (dispatch) {
+		dispatch({
+			type: "REQUEST_PENDING"
+		});
+
+		(0, _axios2.default)({
 			method: "post",
 			url: "/request",
 			data: {
@@ -60,6 +85,56 @@ function request(username, bookID) {
 			headers: {
 				"content-type": "application/json"
 			}
-		})
+		}).then(function (res) {
+			// parse the requests
+			parseRequests(dispatch, res.data.requests, res.data.requestNotifs);
+		});
 	};
+}
+
+function cancelRequest(username, requestID) {
+	return function (dispatch) {
+		dispatch({
+			type: "REQUEST_PENDING"
+		});
+
+		(0, _axios2.default)({
+			method: "post",
+			url: "/cancel_request",
+			data: {
+				username: username,
+				requestID: requestID
+			},
+			headers: {
+				"content-type": "application/json"
+			}
+		}).then(function (res) {
+			// parse the requests
+			parseRequests(dispatch, res.data.requests, res.data.requestNotifs);
+		});
+	};
+}
+
+function parseRequests(dispatch, requests, requestNotifs) {
+
+	console.log("parsing request...");
+	(0, _axios2.default)({
+		method: "post",
+		url: "/parse_request",
+		data: {
+			requests: requests,
+			requestNotifs: requestNotifs
+		}
+	}).then(function (res) {
+		console.log("request res", res);
+		dispatch({
+			type: "REQUEST_PARSED",
+			payload: res
+		});
+	}).catch(function (err) {
+		dispatch({
+			type: "REQUEST_FAILED",
+			payload: err
+		});
+	});
 }

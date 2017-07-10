@@ -33,15 +33,18 @@ var InputField = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				"div",
-				null,
+				{ className: this.props.groupClassName },
 				_react2.default.createElement(
 					"label",
 					{ htmlFor: this.props.id },
 					this.props.label
 				),
 				_react2.default.createElement("input", { id: this.props.id,
+					className: this.props.className,
 					type: this.props.type,
-					placeholder: this.props.placeholder
+					placeholder: this.props.placeholder,
+					value: this.props.value,
+					disabled: this.props.disabled
 				})
 			);
 		}

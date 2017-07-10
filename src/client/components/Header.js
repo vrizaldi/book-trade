@@ -31,27 +31,35 @@ import { login, signup } from "../actions/UserActions";
 		if(this.props.status == "fetching") {
 			return(
 				<div id="over-all">
-					<p>Fetching user data...</p>
+					<div id="over-all-text"><p>Fetching user data...</p></div>
 				</div>
 			);
 		}
 
 		return(
-			<header>
-				#header
-				{
-					this.props.loggedIn ? (
-						<p>Hello, 
-							<Link to="/profile">{this.props.username}</Link>
-						</p>
-					)	: (
-						<LoginForm 
-							login={this.login.bind(this)} 
-							signup={this.signup.bind(this)} 
-						/>
-					)
-				}
-				
+			<header className="navbar fixed-top">
+				<div className="row">
+					<div id="logo" className="col-md-2">
+						#header
+					</div>
+					<div className="col-md-10">
+						{
+							this.props.loggedIn ? (
+								<div className="nav nav-fill row"> 
+									<Link className="nav-link" to="/">Home</Link>
+									<Link className="nav-link" to="/profile/shelf">Manage Library</Link>
+									<Link className="nav-link" to="/profile/settings">
+										Settings</Link>
+								</div>
+							)	: (
+								<LoginForm 
+									login={this.login.bind(this)} 
+									signup={this.signup.bind(this)} 
+								/>
+							)
+						}
+					</div>
+				</div>
 			</header>
 		);
 	}

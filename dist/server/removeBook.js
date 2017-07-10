@@ -28,7 +28,7 @@ function removeBook(req, res) {
 	_mongodb2.default.connect("mongodb://" + dbusername + ":" + dbpassword + "@ds153422.mlab.com:53422/book-trade", function (err, db) {
 		if (err) {
 			res.status(500).send();
-			return db.close();
+			return;
 		}
 
 		// check the user credential

@@ -23,6 +23,10 @@ var _BookList = require("../components/BookList");
 
 var _BookList2 = _interopRequireDefault(_BookList);
 
+var _RequestList = require("../components/RequestList");
+
+var _RequestList2 = _interopRequireDefault(_RequestList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33,10 +37,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Home = (_dec = (0, _reactRedux.connect)(function (store) {
 	return {
-		status: store.collection.status,
+		userStatus: store.user.status,
+		collectionStatus: store.collection.status,
 		loggedIn: store.user.loggedIn,
 		err: store.collection.err,
 		username: store.user.userData.username,
+		requests: store.user.userData.requests,
+		requestNotifs: store.user.userData.requestNotifs,
 		books: store.collection.books
 	};
 }), _dec(_class = function (_React$Component) {
@@ -60,8 +67,15 @@ var Home = (_dec = (0, _reactRedux.connect)(function (store) {
 			this.props.dispatch((0, _UserActions.request)(this.props.username, bookID));
 		}
 	}, {
+		key: "cancelRequest",
+		value: function cancelRequest(requestID) {
+			console.log("Removing " + requestID + "...");
+			this.props.dispatch((0, _UserActions.cancelRequest)(this.props.username, requestID));
+		}
+	}, {
 		key: "render",
 		value: function render() {
+			console.log("loggedIn", this.props.loggedIn);
 			return _react2.default.createElement(
 				"div",
 				null,
@@ -70,14 +84,33 @@ var Home = (_dec = (0, _reactRedux.connect)(function (store) {
 					null,
 					"#Home"
 				),
-				this.props.status == "fetching" ? _react2.default.createElement(
+				this.props.userStatus == "fetching" ? _react2.default.createElement(
 					"p",
 					null,
-					"Fetching collection"
+					"Fetching requests made by and for the user..."
+				) : _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(_RequestList2.default, { title: "Your exchange requests",
+						className: "btn btn-outline-danger",
+						onClick: this.cancelRequest.bind(this),
+						showSource: false,
+						requests: this.props.requests
+					}),
+					_react2.default.createElement(_RequestList2.default, { title: "Requests",
+						className: "btn",
+						showSource: true,
+						requests: this.props.requestNotifs
+					})
+				),
+				this.props.collectionStatus == "fetching" ? _react2.default.createElement(
+					"p",
+					null,
+					"Fetching collection..."
 				) : _react2.default.createElement(_BookList2.default, { title: "Our current collection",
 					books: this.props.books,
 					buttonLabel: "Request exchange",
-					buttonClassName: "btn btn-succes",
+					buttonClassName: "btn btn-success",
 					buttonAction: this.props.loggedIn ? this.request.bind(this) : ""
 				})
 			);

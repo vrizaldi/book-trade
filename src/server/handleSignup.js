@@ -1,5 +1,5 @@
 import mongo from "mongodb";
-import bcrypt from "bcrypt";
+import bcrypt from "bcrypt-nodejs";
 
 import mongologin from "./mongodb.__secret";
 
@@ -38,7 +38,7 @@ export default function handleSignup(req, res) {
 						return db.close();
 					}
 						
-					bcrypt.hash(password, salt, (err, hash) => {
+					bcrypt.hash(password, salt, null, (err, hash) => {
 						if(err) {
 							res.status(500).send();
 							return db.close();

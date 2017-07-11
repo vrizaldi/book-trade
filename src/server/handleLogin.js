@@ -1,5 +1,5 @@
 import mongo from "mongodb";
-import bcrypt from "bcrypt";
+import bcrypt from "bcrypt-nodejs";
 
 import mongologin from "./mongodb.__secret";
 

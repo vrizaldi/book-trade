@@ -9,9 +9,9 @@ var _mongodb = require("mongodb");
 
 var _mongodb2 = _interopRequireDefault(_mongodb);
 
-var _bcrypt = require("bcrypt");
+var _bcryptNodejs = require("bcrypt-nodejs");
 
-var _bcrypt2 = _interopRequireDefault(_bcrypt);
+var _bcryptNodejs2 = _interopRequireDefault(_bcryptNodejs);
 
 var _mongodb3 = require("./mongodb.__secret");
 
@@ -51,13 +51,13 @@ function handleSignup(req, res) {
 			} else {
 				// username is available, so proceed
 				// hash password
-				_bcrypt2.default.genSalt(SALT_ROUNDS, function (err, salt) {
+				_bcryptNodejs2.default.genSalt(SALT_ROUNDS, function (err, salt) {
 					if (err) {
 						res.status(500).send();
 						return db.close();
 					}
 
-					_bcrypt2.default.hash(password, salt, function (err, hash) {
+					_bcryptNodejs2.default.hash(password, salt, null, function (err, hash) {
 						if (err) {
 							res.status(500).send();
 							return db.close();

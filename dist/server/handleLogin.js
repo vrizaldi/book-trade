@@ -9,9 +9,9 @@ var _mongodb = require("mongodb");
 
 var _mongodb2 = _interopRequireDefault(_mongodb);
 
-var _bcrypt = require("bcrypt");
+var _bcryptNodejs = require("bcrypt-nodejs");
 
-var _bcrypt2 = _interopRequireDefault(_bcrypt);
+var _bcryptNodejs2 = _interopRequireDefault(_bcryptNodejs);
 
 var _mongodb3 = require("./mongodb.__secret");
 
@@ -45,7 +45,7 @@ function handleLogin(req, res) {
 				// user found, proceed
 
 				// compare hash of password entered and password stored
-				_bcrypt2.default.compare(password, user.passwordHash, function (err, valid) {
+				_bcryptNodejs2.default.compare(password, user.passwordHash, function (err, valid) {
 					if (err) {
 						res.status(500).send();
 						return db.close();

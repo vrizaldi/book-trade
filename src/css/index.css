@@ -18,6 +18,18 @@ body {
 	color: white;
 }
 
+.nav-link {
+	color: white;
+}
+
+.nav-link:hover {
+	color: #A1EDF2;
+}
+
+.nav-link:active {
+	color: #20BBC6;
+}
+
 .navbar div {
 	float: right;
 }

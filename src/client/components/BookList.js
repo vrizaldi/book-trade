@@ -13,7 +13,7 @@ export default class BookList extends React.Component {
 						this.props.books.map((book) => {
 							return(
 								<div className="books card">
-									<img className="card-img-top" src={book.imageurl} alt={"Cover of " + book.title}/>
+									<img src={book.imageurl} alt={"Cover of " + book.title}/>
 									<h4 className="book-title">{book.title}</h4>
 									<Button className={this.props.buttonClassName} 
 										label={this.props.buttonLabel}

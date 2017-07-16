@@ -89,8 +89,12 @@ var Header = (_dec = (0, _reactRedux.connect)(function (store) {
 					{ className: "row" },
 					_react2.default.createElement(
 						"div",
-						{ id: "logo", className: "col-md-2" },
-						"Book Exchange"
+						{ className: "col-md-2" },
+						_react2.default.createElement(
+							_reactRouterDom.Link,
+							{ to: "/", id: "logo", className: "navbar-brand" },
+							"Book Exchange"
+						)
 					),
 					_react2.default.createElement(
 						"div",

@@ -5,9 +5,17 @@ body {
 
 .navbar.fixed-top {
 	background-color: #fff;
-	box-shadow: 0% 0px 10px 0px #f5eaf4;
-	-webkit-box-shadow: 0% 0px 10px 0px #f5eaf4;
-	-moz-box-shadow: 0% 0px 10px 0px #f5eaf4;
+	background-image: url("/header-background.jpg");
+	background-size: 100% auto;
+	box-shadow: 0% 0px 10px 0px #909191;
+	-webkit-box-shadow: 0% 0px 10px 0px #909191;
+	-moz-box-shadow: 0% 0px 10px 0px #909191;
+}
+
+#logo, #logo:hover, #logo:visited, #logo:active {
+	font-family: 'Indie Flower', cursive;
+	font-weight: bold;
+	color: white;
 }
 
 .navbar div {
@@ -30,6 +38,10 @@ body {
 	vertical-align: middle;
 }
 
+#title {
+	font-family: 'Indie Flower', cursive;
+}
+
 #book-list {
 	display: flex;
 	flex: 0 0 20%;
@@ -46,9 +58,8 @@ body {
 	-moz-box-shadow-bottom: 0 400px 10px -10px #f5eaf4;
 }
 
-.books img {
-	height: 180px;
-	max-width: 200px;
+.book-title {
+	font-family: 'Indie Flower', cursive;
 }
 
 #credit {

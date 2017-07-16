@@ -50,7 +50,7 @@ var Main = function (_React$Component) {
 				null,
 				_react2.default.createElement(
 					"h1",
-					null,
+					{ id: "title" },
 					"Book Exchange"
 				),
 				_react2.default.createElement(

@@ -53,11 +53,11 @@ var BookList = function (_React$Component) {
 					this.props.books.map(function (book) {
 						return _react2.default.createElement(
 							"div",
-							{ className: "books" },
-							_react2.default.createElement("img", { src: book.imageurl, alt: "Cover of " + book.title }),
+							{ className: "books card" },
+							_react2.default.createElement("img", { className: "card-img-top", src: book.imageurl, alt: "Cover of " + book.title }),
 							_react2.default.createElement(
 								"h4",
-								null,
+								{ className: "book-title" },
 								book.title
 							),
 							_react2.default.createElement(_Button2.default, { className: _this2.props.buttonClassName,

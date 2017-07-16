@@ -35,6 +35,7 @@ export default function servePage(req, res) {
 			<meta name="author" content="vrizaldi">
 			<link id="favicon" rel="icon" href="/favicon.png">
 
+			<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> 
 			<link href="/bootstrap.min.css" rel="stylesheet">
 			<link href="/index.min.css" rel="stylesheet">
 		</head>

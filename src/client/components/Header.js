@@ -39,8 +39,10 @@ import { login, signup } from "../actions/UserActions";
 		return(
 			<header className="navbar fixed-top">
 				<div className="row">
-					<div id="logo" className="col-md-2">
-						Book Exchange
+					<div className="col-md-2">
+						<Link to="/" id="logo" className="navbar-brand">
+							Book Exchange
+						</Link>
 					</div>
 					<div className="col-md-10">
 						{

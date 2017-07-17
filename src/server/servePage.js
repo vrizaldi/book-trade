@@ -35,6 +35,7 @@ export default function servePage(req, res) {
 			<meta name="author" content="vrizaldi">
 			<link id="favicon" rel="icon" href="/favicon.png">
 
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> 
 			<link href="/bootstrap.min.css" rel="stylesheet">
 			<link href="/index.min.css" rel="stylesheet">
@@ -42,6 +43,10 @@ export default function servePage(req, res) {
 
 		<body>
 			<div id="app">${html}</div>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+			<script src="/bootstrap.min.js"></script>
 			<script src="/client.min.js"></script>
 			<p id="credit">Verdy Noorghifari 2017 © All right reversed.</p>
 		</body>

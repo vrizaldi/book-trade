@@ -27,6 +27,10 @@ var _RequestList = require("../components/RequestList");
 
 var _RequestList2 = _interopRequireDefault(_RequestList);
 
+var _MainCarousel = require("../components/MainCarousel");
+
+var _MainCarousel2 = _interopRequireDefault(_MainCarousel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79,35 +83,40 @@ var Home = (_dec = (0, _reactRedux.connect)(function (store) {
 			return _react2.default.createElement(
 				"div",
 				null,
-				this.props.userStatus == "fetching" ? _react2.default.createElement(
-					"p",
-					null,
-					"Fetching requests made by and for the user..."
-				) : _react2.default.createElement(
+				_react2.default.createElement("img", { src: "/mainimg.jpeg", className: "d-block img-fluid" }),
+				_react2.default.createElement(
 					"div",
-					null,
-					_react2.default.createElement(_RequestList2.default, { title: "Your exchange requests",
-						className: "btn btn-outline-danger",
-						onClick: this.cancelRequest.bind(this),
-						showSource: false,
-						requests: this.props.requests
-					}),
-					_react2.default.createElement(_RequestList2.default, { title: "Requests",
-						className: "btn",
-						showSource: true,
-						requests: this.props.requestNotifs
+					{ id: "book-list-wrapper" },
+					this.props.userStatus == "fetching" ? _react2.default.createElement(
+						"p",
+						null,
+						"Fetching requests made by and for the user..."
+					) : _react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement(_RequestList2.default, { title: "Your exchange requests",
+							className: "btn btn-outline-danger",
+							onClick: this.cancelRequest.bind(this),
+							showSource: false,
+							requests: this.props.requests
+						}),
+						_react2.default.createElement(_RequestList2.default, { title: "Requests",
+							className: "btn",
+							showSource: true,
+							requests: this.props.requestNotifs
+						})
+					),
+					this.props.collectionStatus == "fetching" ? _react2.default.createElement(
+						"p",
+						null,
+						"Fetching collection..."
+					) : _react2.default.createElement(_BookList2.default, { title: "Our current collection",
+						books: this.props.books,
+						buttonLabel: "Request exchange",
+						buttonClassName: "btn btn-success",
+						buttonAction: this.props.loggedIn ? this.request.bind(this) : ""
 					})
-				),
-				this.props.collectionStatus == "fetching" ? _react2.default.createElement(
-					"p",
-					null,
-					"Fetching collection..."
-				) : _react2.default.createElement(_BookList2.default, { title: "Our current collection",
-					books: this.props.books,
-					buttonLabel: "Request exchange",
-					buttonClassName: "btn btn-success",
-					buttonAction: this.props.loggedIn ? this.request.bind(this) : ""
-				})
+				)
 			);
 		}
 	}]);

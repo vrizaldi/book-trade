@@ -1,11 +1,9 @@
 body {
-	padding: 6em 4em 4em 4em;
 	margin: 0;
 }
 
 .navbar.fixed-top {
 	background-color: #fff;
-	background-image: url("/header-background.jpg");
 	background-size: 100% auto;
 	box-shadow: 0% 0px 10px 0px #909191;
 	-webkit-box-shadow: 0% 0px 10px 0px #909191;
@@ -15,39 +13,10 @@ body {
 #logo, #logo:hover, #logo:visited, #logo:active {
 	font-family: 'Indie Flower', cursive;
 	font-weight: bold;
-	color: white;
-}
-
-.nav-link {
-	color: white;
-}
-
-.nav-link:hover {
-	color: #A1EDF2;
-}
-
-.nav-link:active {
-	color: #20BBC6;
 }
 
 .navbar div {
 	float: right;
-}
-
-.navbar input, .navbar button {
-	border-width: 2px;
-	border-color: #000;
-	border-style: solid;
-	border-radius: 5px;
-
-	transition: 0.6s;
-	-moz-transition: 0.6s;
-	-webkit-transition: 0.6s;
-	-o-transition: 0.6s;
-}
-
-.navbar input:focus, .navbar input:hover {
-	border-color: #fff;
 }
 
 #over-all {
@@ -70,15 +39,19 @@ body {
 	font-family: 'Indie Flower', cursive;
 }
 
+#book-list-wrapper {
+	margin: 2em 4em 0 4em;
+}
 #book-list {
 	display: flex;
 	flex: 0 0 20%;
+	flex-wrap: wrap;
 	overflow-x: auto;
 }
 
 .books {
 	height: 400px;
-	padding: 10px 10px 0 10px;
+	padding: 10px 10px 10px 10px;
 	width: 200px;
 	text-align: center;
 	box-shadow-bottom: 0 400px 10px -10px #f5eaf4;

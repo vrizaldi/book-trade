@@ -9,7 +9,6 @@ export default class Main extends React.Component {
 	render() {
 		return(
 			<div>
-				<h1 id="title">Book Exchange</h1>
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route path="/profile" component={Profile} />
@@ -17,9 +16,5 @@ export default class Main extends React.Component {
 				</Switch>
 			</div>
 		);
-	}
-
-	changeText() {
-		this.props.dispatch(Actions.changeText("It works"));
 	}
 }

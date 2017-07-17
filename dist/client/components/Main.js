@@ -49,11 +49,6 @@ var Main = function (_React$Component) {
 				"div",
 				null,
 				_react2.default.createElement(
-					"h1",
-					{ id: "title" },
-					"Book Exchange"
-				),
-				_react2.default.createElement(
 					_reactRouterDom.Switch,
 					null,
 					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _Home2.default }),
@@ -61,11 +56,6 @@ var Main = function (_React$Component) {
 					_react2.default.createElement(_reactRouterDom.Route, { path: "/logging_in", component: _LoadingUser2.default })
 				)
 			);
-		}
-	}, {
-		key: "changeText",
-		value: function changeText() {
-			this.props.dispatch(Actions.changeText("It works"));
 		}
 	}]);
 

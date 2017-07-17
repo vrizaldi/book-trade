@@ -14,7 +14,9 @@ export default class BookList extends React.Component {
 							return(
 								<div className="books card">
 									<img src={book.imageurl} alt={"Cover of " + book.title}/>
-									<h4 className="book-title">{book.title}</h4>
+									<div className="card-block">
+										<h4 className="card-title book-title">{book.title}</h4>
+									</div>
 									<Button className={this.props.buttonClassName} 
 										label={this.props.buttonLabel}
 										action={this.props.buttonAction}

@@ -56,9 +56,13 @@ var BookList = function (_React$Component) {
 							{ className: "books card" },
 							_react2.default.createElement("img", { src: book.imageurl, alt: "Cover of " + book.title }),
 							_react2.default.createElement(
-								"h4",
-								{ className: "book-title" },
-								book.title
+								"div",
+								{ className: "card-block" },
+								_react2.default.createElement(
+									"h4",
+									{ className: "card-title book-title" },
+									book.title
+								)
 							),
 							_react2.default.createElement(_Button2.default, { className: _this2.props.buttonClassName,
 								label: _this2.props.buttonLabel,

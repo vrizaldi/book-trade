@@ -5,6 +5,7 @@ import { fetchCollection } from "../actions/CollectionActions";
 import { request, cancelRequest } from "../actions/UserActions";
 import BookList from "../components/BookList";
 import RequestList from "../components/RequestList";
+import MainCarousel from "../components/MainCarousel";
 
 @connect((store) => {
 	return {
@@ -37,39 +38,43 @@ import RequestList from "../components/RequestList";
 		console.log("loggedIn", this.props.loggedIn);
 		return(
 			<div>
-				{
-					this.props.userStatus == "fetching" ? (
-						<p>Fetching requests made by and for the user...</p>
-					) : (
-						<div>
-							<RequestList title="Your exchange requests"
-								className="btn btn-outline-danger"
-								onClick={this.cancelRequest.bind(this)}
-								showSource={false}
-								requests={this.props.requests}
-							/>
-							<RequestList title="Requests"
-								className="btn"
-								showSource={true}
-								requests={this.props.requestNotifs}
-							/>
-						</div>
-					)
-				}
+				<img src="/mainimg.jpeg" className="d-block img-fluid"/>
 
-				{
-					this.props.collectionStatus == "fetching" ? (
-						<p>Fetching collection...</p>
-					) : (
-						<BookList title="Our current collection" 
-							books={this.props.books} 
-							buttonLabel="Request exchange"
-							buttonClassName="btn btn-success"
-							buttonAction={this.props.loggedIn ? 
-								this.request.bind(this) : ""}
-						/>
-					)
-				}
+				<div id="book-list-wrapper">
+					{
+						this.props.userStatus == "fetching" ? (
+							<p>Fetching requests made by and for the user...</p>
+						) : (
+							<div>
+								<RequestList title="Your exchange requests"
+									className="btn btn-outline-danger"
+									onClick={this.cancelRequest.bind(this)}
+									showSource={false}
+									requests={this.props.requests}
+								/>
+								<RequestList title="Requests"
+									className="btn"
+									showSource={true}
+									requests={this.props.requestNotifs}
+								/>
+							</div>
+						)
+					}
+
+					{
+						this.props.collectionStatus == "fetching" ? (
+							<p>Fetching collection...</p>
+						) : (
+							<BookList title="Our current collection" 
+								books={this.props.books} 
+								buttonLabel="Request exchange"
+								buttonClassName="btn btn-success"
+								buttonAction={this.props.loggedIn ? 
+									this.request.bind(this) : ""}
+							/>
+						)
+					}
+				</div>
 			</div>
 		);
 	}
